@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .button {
+            padding: 20px;
+            border: 1px solid black;
+            cursor: pointer;
+            background-color: #fff;
+        }
+
+        .button:hover {
+            background-color: #f99;
+        }
+
+        .modal-wrapper {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            background-color: rgba(255, 255, 255, 0.8);
+            top: 0;
+            left: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-wrapper_hidden {
+            display: none;
+        }
+
+        .modal-window {
+            max-width: 300px;
+            min-height: 200px;
+            padding: 20px;
+            border: 1px solid black;
+            background-color: #fff;
+            
+        }
+    </style>
+</head>
+<body>
+    <main class="main-container">
+        <h1>
+            Header 1
+        </h1>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi eligendi, dignissimos vel placeat deleniti beatae iure ex recusandae!
+            Mollitia quo perferendis quasi corporis sed qui placeat dignissimos repellat modi nesciunt.
+        </p>
+        <h2>
+            Header 2
+        </h2>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi eligendi, dignissimos vel placeat deleniti beatae iure ex recusandae!
+            Mollitia quo perferendis quasi corporis sed qui placeat dignissimos repellat modi nesciunt.
+        </p>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi eligendi, dignissimos vel placeat deleniti beatae iure ex recusandae!
+            Mollitia quo perferendis quasi corporis sed qui placeat dignissimos repellat modi nesciunt.
+        </p>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi eligendi, dignissimos vel placeat deleniti beatae iure ex recusandae!
+            Mollitia quo perferendis quasi corporis sed qui placeat dignissimos repellat modi nesciunt.
+        </p>
+        <div>
+            <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            </p>
+            <button class="button js-open-modal">
+                open modal window
+            </button>
+        </div>
+        <h2>
+            Header 2
+        </h2>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi eligendi, dignissimos vel placeat deleniti beatae iure ex recusandae!
+            Mollitia quo perferendis quasi corporis sed qui placeat dignissimos repellat modi nesciunt.
+        </p>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi eligendi, dignissimos vel placeat deleniti beatae iure ex recusandae!
+            Mollitia quo perferendis quasi corporis sed qui placeat dignissimos repellat modi nesciunt.
+        </p>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi eligendi, dignissimos vel placeat deleniti beatae iure ex recusandae!
+            Mollitia quo perferendis quasi corporis sed qui placeat dignissimos repellat modi nesciunt.
+        </p>
+    </main>
+    
+    <div class="modal-wrapper modal-wrapper_hidden js-modal-wrapper">
+        <div class="modal-window js-modal-window">
+            <h2>
+                Header 2
+            </h2>
+            <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            </p>
+            <button class="button js-close-modal">
+                close modal window
+            </button>
+        </div>
+    </div>
+
+    <script>
+        var isModalWindowOpen = false;
+
+        var openModalButtons = document.querySelectorAll('.js-open-modal'); // array
+        var closeModalButtons = document.querySelectorAll('.js-close-modal'); // array
+        var modalWrapper = document.querySelector('.js-modal-wrapper');
+        var modalWindow = document.querySelector('.js-modal-window');
+
+        function toggleModalWindow(value) { // boolean
+            isModalWindowOpen = value;
+
+            if (isModalWindowOpen) {
+                modalWrapper.classList.remove('modal-wrapper_hidden');
+            } else {
+                modalWrapper.classList.add('modal-wrapper_hidden');
+            }
+        }
+
+        openModalButtons.forEach(function(arrayItem){
+            arrayItem.addEventListener('click', function() {
+                toggleModalWindow(true);
+            })
+        });
+
+        closeModalButtons.forEach(function(arrayItem){
+            arrayItem.addEventListener('click', function() {
+                toggleModalWindow(false);
+            })
+        });
+
+        document.addEventListener('click', function(event) {
+            if (
+                isModalWindowOpen &&
+                event.target.contains(modalWindow) &&
+                event.target !== modalWindow
+            ) {
+                toggleModalWindow(false);
+            }
+        })
+    </script>
+</body>
+</html>
